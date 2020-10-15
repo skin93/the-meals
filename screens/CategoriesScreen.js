@@ -5,7 +5,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Platform,
 } from 'react-native'
 
 import Colors from '../constants/Colors'
@@ -47,10 +46,6 @@ export default CategoriesScreen
 
 CategoriesScreen.navigationOptions = {
   headerTitle: 'Meal Categories',
-  headerStyle: {
-    backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white',
-  },
-  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
 }
 
 const styles = StyleSheet.create({
