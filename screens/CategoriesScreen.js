@@ -43,6 +43,8 @@ const CategoriesScreen = (props) => {
   )
 }
 
+export default CategoriesScreen
+
 CategoriesScreen.navigationOptions = {
   headerTitle: 'Meal Categories',
   headerStyle: {
@@ -50,8 +52,6 @@ CategoriesScreen.navigationOptions = {
   },
   headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
 }
-
-export default CategoriesScreen
 
 const styles = StyleSheet.create({
   screen: {
