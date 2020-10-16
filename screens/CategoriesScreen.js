@@ -1,13 +1,8 @@
 import React from 'react'
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
+import { FlatList } from 'react-native'
 
-import Colors from '../constants/Colors'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import CustomHeaderButton from '../components/header/CustomHeaderButton'
 
 import { CATEGORIES } from '../data/dummy-data'
 import CategoryGridTile from '../components/categories/CategoryGridTile'
@@ -42,14 +37,19 @@ const CategoriesScreen = (props) => {
 
 export default CategoriesScreen
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meal Categories',
+CategoriesScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: 'Meal Categories',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title='Menu'
+          iconName='ios-menu'
+          onPress={() => {
+            navData.navigation.toggleDrawer()
+          }}
+        />
+      </HeaderButtons>
+    ),
+  }
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
