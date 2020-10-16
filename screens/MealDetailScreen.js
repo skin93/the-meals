@@ -1,7 +1,9 @@
 import React from 'react'
-import { StyleSheet, Button, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/header/CustomHeaderButton'
+import BaseText from '../components/UI/BaseText'
+import BaseListItem from '../components/UI/BaseListItem'
 
 import { MEALS } from '../data/dummy-data'
 
@@ -10,16 +12,22 @@ const MealDetailScreen = (props) => {
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId)
   return (
-    <View style={styles.screen}>
-      <Text>{selectedMeal.title}</Text>
-      <Button
-        title='Go Back to Categories'
-        onPress
-        onPress={() => {
-          props.navigation.popToTop()
-        }}
-      />
-    </View>
+    <ScrollView>
+      <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
+      <View style={styles.details}>
+        <BaseText>{selectedMeal.duration}m</BaseText>
+        <BaseText>{selectedMeal.complexity.toUpperCase()}</BaseText>
+        <BaseText>{selectedMeal.affordability.toUpperCase()}</BaseText>
+      </View>
+      <Text style={styles.title}>Ingredients</Text>
+      {selectedMeal.ingredients.map((ingredient) => (
+        <BaseListItem key={ingredient}>{ingredient}</BaseListItem>
+      ))}
+      <Text style={styles.title}>Steps</Text>
+      {selectedMeal.steps.map((step) => (
+        <BaseListItem key={step}>{step}</BaseListItem>
+      ))}
+    </ScrollView>
   )
 }
 
@@ -46,9 +54,18 @@ MealDetailScreen.navigationOptions = (navigationData) => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  image: {
+    width: '100%',
+    height: 200,
+  },
+  details: {
+    flexDirection: 'row',
+    padding: 15,
+    justifyContent: 'space-around',
+  },
+  title: {
+    fontFamily: 'open-sans-bold',
+    fontSize: 20,
+    textAlign: 'center',
   },
 })
