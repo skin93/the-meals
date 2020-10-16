@@ -10,13 +10,15 @@ import {
 import Colors from '../constants/Colors'
 
 import { CATEGORIES } from '../data/dummy-data'
+import CategoryGridTile from '../components/categories/CategoryGridTile'
 
 const CategoriesScreen = (props) => {
   const renderGridItem = (itemData) => {
     return (
-      <TouchableOpacity
-        style={styles.gridElement}
-        onPress={() => {
+      <CategoryGridTile
+        color={itemData.item.color}
+        title={itemData.item.title}
+        onSelect={() => {
           props.navigation.navigate({
             routeName: 'CategoryMeals',
             params: {
@@ -24,11 +26,7 @@ const CategoriesScreen = (props) => {
             },
           })
         }}
-      >
-        <View>
-          <Text>{itemData.item.title}</Text>
-        </View>
-      </TouchableOpacity>
+      />
     )
   }
 
@@ -53,10 +51,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  gridElement: {
-    flex: 1,
-    margin: 15,
-    height: 150,
   },
 })
